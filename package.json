@@ -1,0 +1,15 @@
+{
+  "name": "comics",
+  "version": "0.0.1",
+  "description": "Small comic app",
+  "main": "comic.js",
+  "dependencies": {
+    "grunt": "~0.4.1"
+  },
+  "devDependencies": {
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt-contrib-jshint": "~0.6.4",
+    "grunt-contrib-compass": "~0.6.0"
+  },
+  "author": "Ryan Christiani"
+}

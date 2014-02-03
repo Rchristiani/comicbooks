@@ -2,7 +2,7 @@ angular.module('Comics',['ngRoute'])
 	.config(function ($routeProvider) {
 		$routeProvider.when('/', {
 			controler: 'MainCtrl',
-			templateUrl: 'templates/character.html'
+			templateUrl: 'templates/home.html'
 		});
 	})
 	.controller('MainCtrl',function($scope, ComicBooks) {
@@ -11,25 +11,19 @@ angular.module('Comics',['ngRoute'])
 		});
 	})
 	.directive('comicbook',function() {
-
 		var linker = function(scope, element, attrs) {
-			console.log(element);
+			element.on('click',function() {
+
+			});
 		};
-		var controller = function($scope, ComicBooks) {
-			console.log('hey');
-			$scope.getCharacterInfo = function(characterName) {
-				console.log('hey');
-				//On click get the character name so we can get the info from the server
-				//Why you no work?
-			};
-		}
 		return {
 			restrict: 'A',
-			link: linker,
-			controller: controller
+			link: linker
 		};
 	})
 	.factory('ComicBooks',function($http,$q) {
+		//Key has to be md5(ts+privateKey+publicKey)
+		//For server Side only
 		//For Client Side
 		//Where apikey is public key
 		//http://gateway.marvel.com/v1/comics/?ts=1&apikey=1234

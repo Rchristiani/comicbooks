@@ -1,0 +1,12 @@
+# SASS
+*.sassc
+.sass-cache
+
+# NPM
+npm-debug.log
+node_modules
+
+# OS Junk
+.DS_Store
+*_notes/
+Thumbs.db

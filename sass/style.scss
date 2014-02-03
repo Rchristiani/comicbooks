@@ -1,0 +1,32 @@
+@import "compass/css3/transition";
+
+* {
+	box-sizing: border-box;
+}
+html,
+body {
+	margin: 0;
+	padding: 0;
+	font-family: 'Open Sans';
+}
+.character {
+	width: 20%;
+	height: auto;
+	padding-bottom: 20%;
+	float: left;
+	background-repeat: no-repeat;
+	background-size: cover;
+	h3 {
+		width: 80%;
+		background-color: #ffffff;
+		padding: 1%;
+		margin: 0px;
+	}
+	opacity: 0.5;
+	@include transition(opacity 0.5s ease);
+	&:hover {
+		cursor: pointer;
+		opacity: 1;
+	}
+	
+}

@@ -1,0 +1,6 @@
+<div comicbook ng-repeat="character in characters" 
+	class="character" 
+	style="background-image: url({{character.thumbnail.path}}.{{character.thumbnail.extension}})" 
+	ng-click="getCharacterInfo('Ryan')">
+	<h3>{{character.name}}</h3>
+</div>

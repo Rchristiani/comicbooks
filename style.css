@@ -1,13 +1,39 @@
+/* line 3, sass/style.scss */
+* {
+  box-sizing: border-box;
+}
+
+/* line 7, sass/style.scss */
 html,
 body {
-	margin: 0;
-	padding: 0;
+  margin: 0;
+  padding: 0;
+  font-family: 'Open Sans';
 }
+
+/* line 12, sass/style.scss */
 .character {
-	width: 32%;
-	height: auto;
-	padding-bottom: 20%;
-	float: left;
-	background-repeat: no-repeat;
-	background-size: cover;
+  width: 20%;
+  height: auto;
+  padding-bottom: 20%;
+  float: left;
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: 0.5;
+  -webkit-transition: opacity 0.5s ease;
+  -moz-transition: opacity 0.5s ease;
+  -o-transition: opacity 0.5s ease;
+  transition: opacity 0.5s ease;
+}
+/* line 19, sass/style.scss */
+.character h3 {
+  width: 80%;
+  background-color: #ffffff;
+  padding: 1%;
+  margin: 0px;
+}
+/* line 27, sass/style.scss */
+.character:hover {
+  cursor: pointer;
+  opacity: 1;
 }
