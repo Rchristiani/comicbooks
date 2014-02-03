@@ -1,0 +1,13 @@
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+.character {
+	width: 32%;
+	height: auto;
+	padding-bottom: 20%;
+	float: left;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
