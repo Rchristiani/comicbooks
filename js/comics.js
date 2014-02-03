@@ -2,7 +2,7 @@ angular.module('Comics',['ngRoute'])
 	.config(function ($routeProvider) {
 		$routeProvider.when('/', {
 			controler: 'MainCtrl',
-			templateUrl: 'templates/home.html'
+			templateUrl: 'templates/character.html'
 		});
 	})
 	.controller('MainCtrl',function($scope, ComicBooks) {
@@ -12,13 +12,20 @@ angular.module('Comics',['ngRoute'])
 	})
 	.directive('comicbook',function() {
 		var linker = function(scope, element, attrs) {
-			element.on('click',function() {
 
-			});
+		};
+		var controller = function($scope, ComicBooks) {
+			$scope.getCharacterInfo = function(characterId) {
+				ComicBooks.findOne(characterId).then(function(result) {
+					console.log(result);
+				});
+				//On click get the character name so we can get the info from the server
+			};
 		};
 		return {
 			restrict: 'A',
-			link: linker
+			link: linker,
+			controller: controller
 		};
 	})
 	.factory('ComicBooks',function($http,$q) {
@@ -31,14 +38,21 @@ angular.module('Comics',['ngRoute'])
 		var baseUrl = 'http://gateway.marvel.com/v1/';
 		var find = function() {
 			var def = $q.defer();
-			var ts = +new Date();
 			var url = baseUrl + 'public/characters?limit=50&apikey=' + publicKey;
+			$http.get(url).success(def.resolve).error(def.reject);
+
+			return def.promise;
+		};
+		var findOne = function(id) {
+			var def = $q.defer();
+			var url = baseUrl + 'public/characters/' + id +'/stories?apikey=' + publicKey;
 			$http.get(url).success(def.resolve).error(def.reject);
 
 			return def.promise;
 		};
 
 		return {
-			find: find
+			find: find,
+			findOne: findOne
 		};
 	});
