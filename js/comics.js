@@ -1,8 +1,14 @@
-angular.module('Comics',['ngRoute'])
-	.config(function ($routeProvider) {
-		$routeProvider.when('/', {
+angular.module('Comics',['ui.router'])
+	.config(function ($stateProvider, $urlRouterProvider) {
+		$stateProvider.state('index', {
+			url: '',
 			controler: 'MainCtrl',
 			templateUrl: 'templates/character.html'
+		})
+		.state('index.single', {
+			url: '/:id',
+			templateUrl: 'templates/characterPopUp.html',
+			controller: 'SingleCharacter'
 		});
 	})
 	.controller('MainCtrl',function($scope, ComicBooks) {
@@ -10,23 +16,12 @@ angular.module('Comics',['ngRoute'])
 			$scope.characters = result.data.results;
 		});
 	})
-	.directive('comicbook',function() {
-		var linker = function(scope, element, attrs) {
-
-		};
-		var controller = function($scope, ComicBooks) {
-			$scope.getCharacterInfo = function(characterId) {
-				ComicBooks.findOne(characterId).then(function(result) {
-					console.log(result);
-				});
-				//On click get the character name so we can get the info from the server
-			};
-		};
-		return {
-			restrict: 'A',
-			link: linker,
-			controller: controller
-		};
+	.controller('SingleCharacter', function($scope, $rootScope, $stateParams, ComicBooks) {
+		$rootScope.$on('$stateChangeStart',function(evt,toParams) {
+			evt.preventDefault();
+			console.log(toParams);
+			console.log($stateParams);
+		});
 	})
 	.factory('ComicBooks',function($http,$q) {
 		//Key has to be md5(ts+privateKey+publicKey)

@@ -1,6 +1,10 @@
-<div comicbook ng-repeat="character in characters" 
-	class="character" 
-	style="background-image: url({{character.thumbnail.path}}.{{character.thumbnail.extension}})" 
-	ng-click="getCharacterInfo(character.id)">
-	<h3>{{character.name}}</h3>
+<div comicbook ng-repeat="character in characters" >
+	<a href="#/{{character.id}}">
+		<div class="character"
+		style="background-image: url({{character.thumbnail.path}}.{{character.thumbnail.extension}})" >
+			<h3>{{character.name}}</h3>
+		</div>	
+	</a>
 </div>
+
+<div ui-view class="popup"></div>
