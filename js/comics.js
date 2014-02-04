@@ -15,17 +15,36 @@ angular.module('Comics',['ui.router'])
 		ComicBooks.find().then(function(result) {
 			$scope.characters = result.data.results;
 		});
+
 	})
-	.controller('SingleCharacter', function($scope, $rootScope, $stateParams, ComicBooks) {
-		$rootScope.$on('$stateChangeStart',function(evt,toParams) {
-			evt.preventDefault();
-			console.log(toParams);
-			console.log($stateParams);
+	.controller('SingleCharacter', function($scope, $rootScope, $stateParams, ComicBooks, $window) {
+		var id = $stateParams.id;
+		ComicBooks.findOne(id).then(function(result) {
+			var data = result.data.results[0];
+			$scope.characterName = data.name;
+			$scope.characterUrl = data.urls[0].url;
+			var desc = data.description;
+			if(desc.length <= 0){
+				desc = "No description provided";
+			}
+			$scope.description = desc;
+		});
+		$scope.$on('$viewContentLoaded',function(event) {
+			console.log('loaded');
 		});
 	})
+	//Works to prevent scrolling window
+	.value('$anchorScroll', angular.noop)
+	.directive('popup',function() {
+		var linker = function(scope) {
+			console.log(scope);
+		}
+		return {
+			link: linker,
+			restrict: 'A'
+		};
+	})
 	.factory('ComicBooks',function($http,$q) {
-		//Key has to be md5(ts+privateKey+publicKey)
-		//For server Side only
 		//For Client Side
 		//Where apikey is public key
 		//http://gateway.marvel.com/v1/comics/?ts=1&apikey=1234
@@ -40,7 +59,7 @@ angular.module('Comics',['ui.router'])
 		};
 		var findOne = function(id) {
 			var def = $q.defer();
-			var url = baseUrl + 'public/characters/' + id +'/stories?apikey=' + publicKey;
+			var url = baseUrl + 'public/characters/' + id +'?apikey=' + publicKey;
 			$http.get(url).success(def.resolve).error(def.reject);
 
 			return def.promise;

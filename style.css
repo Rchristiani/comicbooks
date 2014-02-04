@@ -37,3 +37,11 @@ body {
   cursor: pointer;
   opacity: 1;
 }
+
+/* line 33, sass/style.scss */
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
