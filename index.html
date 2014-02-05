@@ -2,7 +2,7 @@
 <html lang="en" ng-app="Comics">
 <head>
 	<meta charset="UTF-8">
-	<title>Comic Books</title>
+	<title>Marvel Comic Book Characters</title>
 	<script src="js/jquery.min.js"></script>
 	<script src="js/angular.min.js"></script>
 	<script src="js/angular-ui-router.min.js"></script>
@@ -12,6 +12,7 @@
 	<link rel="stylesheet" href="style.css">
 </head>
 <body ng-controller="MainCtrl">
-	<div ui-view infinite-scroll="more.load()" infinite-scroll-distance="0" infinite-scroll-disabled='more.busy' class="container"></div>
+	<div ui-view infinite-scroll="more.load()" infinite-scroll-distance="0" infinite-scroll-disabled='more.busy' class="main-container"></div>
+	<div class="credit"><a href="http://marvel.com" target="_blank">Data provided by Marvel. © 2014 Marvel</a></div>
 </body>
 </html>

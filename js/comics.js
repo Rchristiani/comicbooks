@@ -12,23 +12,12 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 		controller: 'SingleCharacter'
 	});
 });
-app.controller('MainCtrl',function($scope, ComicBooks) {
-	ComicBooks.find().then(function(result) {
-		var data = result.data.results;
-		$scope.characters = data;
-	});
-	$scope.more = new ComicBooks.LoadMore();
+
+app.controller('MainCtrl',function($scope, ComicBooks) {	
+	//use this to get data
+	$scope.more = new ComicBooks.LoadMore($scope);
 });
-app.directive('character', function() {
-	var linker = function(scope, element, attrs) {
-	};
-	var controller = function() {};
-	return  {
-		restrict: 'E',
-		link: linker,
-		controller: controller
-	};
-});
+
 app.controller('SingleCharacter', function($scope, $rootScope, $stateParams, ComicBooks, $window) {
 	var id = $stateParams.id;
 	ComicBooks.findOne(id).then(function(result) {
@@ -47,6 +36,7 @@ app.controller('SingleCharacter', function($scope, $rootScope, $stateParams, Com
 });
 //Works to prevent scrolling window
 app.value('$anchorScroll', angular.noop);
+
 app.directive('popup',function() {
 	var linker = function(scope,element,attrs) {
 		scope.$on('contentLoaded',function() {
@@ -61,6 +51,7 @@ app.directive('popup',function() {
 		link: linker
 	};
 });
+
 app.factory('ComicBooks',function($http,$q) {
 	//For Client Side
 	//Where apikey is public key
@@ -68,6 +59,7 @@ app.factory('ComicBooks',function($http,$q) {
 	var publicKey = 'f1da2ae2dc487b462dc04513dea9eac1';
 	var baseUrl = 'http://gateway.marvel.com/v1/';
 	var limit = 50;
+	//Not really needed now, since I call infinitescroll at the start
 	var find = function() {
 		var def = $q.defer();
 		var url = baseUrl + 'public/characters?limit='+ limit +'&apikey=' + publicKey;
@@ -89,18 +81,24 @@ app.factory('ComicBooks',function($http,$q) {
 
 		return def.promise;
 	};
-	var LoadMore = function() {
+	var LoadMore = function($scope) {
 		this.offset = 0;
 		this.busy = false;
-		//Need too append new character to exisiting list...or use this list?
 		this.characters = [];
+		//Need too append new character to exisiting list...or use this list?
 		this.load = function() {
 			if(this.busy) {
 				return;
 			}
 			this.busy = true;
-
-			this.busy = true;
+			findNext(this.offset).then(function(results) {
+				var chars = results.data.results;
+				chars.forEach(function(item) {
+					this.characters.push(item);
+				}.bind(this));
+				this.offset++;
+				this.busy = false;
+			}.bind(this));
 		}.bind(this);
 	};
 

@@ -15,8 +15,11 @@ a:visited,
 a:hover { 
 	color: rgba(0,0,0,0.9);
 }
-.container {
+.main-container {
 	overflow: hidden;
+}
+.character-container {
+	-webkit-transform: translateZ(0);
 }
 .character {
 	width: 20%;
@@ -49,29 +52,29 @@ a:hover {
 	left: 50%;
 	z-index: 1000;
 	width: 500px;
+	height: 500px;
 	margin-left: -250px;
 	background-color: #ffffff;
+	background-size: cover;
+	background-repeat: no-repeat;
 	@include transition(all 0.5s ease);
 	@include transform(scale(2));
 	visibility: hidden;
 	opacity: 0;
+	h1 {
+		margin-top: 0px;
+	}
 	&.show {
 		@include transform(scale(1));
 		visibility: visible;
 		opacity: 1;
 	}
-	.left {
-		width: 150px;
-		img {
-			width: 100%;
-		}
-		float:left;
-	}
-	.right {
+	.bottom {
 		padding: 15px;
-		float: right;
-		width: 350px;
-		position: relative;
+		width: 100%;
+		bottom: 0px;
+		position: absolute;
+		background-color: rgba(255,255,255,0.8);
 	}
 	.close {
 		position: absolute;
@@ -87,4 +90,12 @@ a:hover {
 			cursor: pointer;
 		}
 	}
+}
+.credit { 
+	position: fixed;
+	bottom: 0px;
+	right: 0px;
+	z-index: 1000;
+	padding: 5px;
+	background-color: rgba(255,255,255,0.5);
 }

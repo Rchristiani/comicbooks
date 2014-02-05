@@ -1,10 +1,10 @@
-<character ng-repeat="character in characters" >
+<div ng-repeat="character in more.characters" class="character-container" >
 	<a href="#/{{character.id}}">
 		<div class="character"
 		style="background-image: url({{character.thumbnail.path}}.{{character.thumbnail.extension}})" >
 			<h3>{{character.name}}</h3>
 		</div>	
 	</a>
-</character>
+</div>
 
 <div ui-view></div>
