@@ -86,6 +86,8 @@ app.factory('ComicBooks',function($http,$q) {
 		var def = $q.defer();
 		var url = baseUrl + 'public/characters?limit=' + limit +'&offset=' + (limit*offset) + '&apikey=' + publicKey;
 		$http.get(url).success(def.resolve).error(def.reject);
+
+		return def.promise;
 	};
 	var LoadMore = function() {
 		this.offset = 0;
@@ -97,7 +99,7 @@ app.factory('ComicBooks',function($http,$q) {
 				return;
 			}
 			this.busy = true;
-			console.log('Hey');
+
 			this.busy = true;
 		}.bind(this);
 	};
