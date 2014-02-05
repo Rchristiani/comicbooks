@@ -3,13 +3,15 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Comic Books</title>
+	<script src="js/jquery.min.js"></script>
 	<script src="js/angular.min.js"></script>
 	<script src="js/angular-ui-router.min.js"></script>
+	<script src="js/ng-infinite-scroll.min.js"	></script>
 	<script src="js/comics.js"></script>
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="style.css">
 </head>
 <body ng-controller="MainCtrl">
-	<div ui-view></div>
+	<div ui-view infinite-scroll="more.load()" infinite-scroll-distance="0" infinite-scroll-disabled='more.busy' class="container"></div>
 </body>
 </html>

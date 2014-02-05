@@ -1,4 +1,5 @@
 @import "compass/css3/transition";
+@import "compass/css3/transform";
 
 * {
 	box-sizing: border-box;
@@ -9,6 +10,14 @@ body {
 	padding: 0;
 	font-family: 'Open Sans';
 }
+a:link,
+a:visited,
+a:hover { 
+	color: rgba(0,0,0,0.9);
+}
+.container {
+	overflow: hidden;
+}
 .character {
 	width: 20%;
 	height: auto;
@@ -16,7 +25,11 @@ body {
 	float: left;
 	background-repeat: no-repeat;
 	background-size: cover;
+	position: relative;
 	h3 {
+		position: absolute;
+		top: 0;
+		left: 0;
 		width: 80%;
 		background-color: #ffffff;
 		padding: 1%;
@@ -32,7 +45,46 @@ body {
 }
 .popup {
 	position: fixed;
-	top: 0;
-	left: 0;
+	top: 100px;
+	left: 50%;
 	z-index: 1000;
+	width: 500px;
+	margin-left: -250px;
+	background-color: #ffffff;
+	@include transition(all 0.5s ease);
+	@include transform(scale(2));
+	visibility: hidden;
+	opacity: 0;
+	&.show {
+		@include transform(scale(1));
+		visibility: visible;
+		opacity: 1;
+	}
+	.left {
+		width: 150px;
+		img {
+			width: 100%;
+		}
+		float:left;
+	}
+	.right {
+		padding: 15px;
+		float: right;
+		width: 350px;
+		position: relative;
+	}
+	.close {
+		position: absolute;
+		width: 30px;
+		height: 30px;
+		color: #ffffff;
+		font-size: 20px;
+		padding-left: 10px;
+		right: -30px;
+		top: 0px;
+		background-color: #000000;
+		&:hover {
+			cursor: pointer;
+		}
+	}
 }

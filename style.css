@@ -1,9 +1,9 @@
-/* line 3, sass/style.scss */
+/* line 4, sass/style.scss */
 * {
   box-sizing: border-box;
 }
 
-/* line 7, sass/style.scss */
+/* line 8, sass/style.scss */
 html,
 body {
   margin: 0;
@@ -11,7 +11,19 @@ body {
   font-family: 'Open Sans';
 }
 
-/* line 12, sass/style.scss */
+/* line 15, sass/style.scss */
+a:link,
+a:visited,
+a:hover {
+  color: rgba(0, 0, 0, 0.9);
+}
+
+/* line 18, sass/style.scss */
+.container {
+  overflow: hidden;
+}
+
+/* line 21, sass/style.scss */
 .character {
   width: 20%;
   height: auto;
@@ -19,29 +31,89 @@ body {
   float: left;
   background-repeat: no-repeat;
   background-size: cover;
+  position: relative;
   opacity: 0.5;
   -webkit-transition: opacity 0.5s ease;
   -moz-transition: opacity 0.5s ease;
   -o-transition: opacity 0.5s ease;
   transition: opacity 0.5s ease;
 }
-/* line 19, sass/style.scss */
+/* line 29, sass/style.scss */
 .character h3 {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 80%;
   background-color: #ffffff;
   padding: 1%;
   margin: 0px;
 }
-/* line 27, sass/style.scss */
+/* line 40, sass/style.scss */
 .character:hover {
   cursor: pointer;
   opacity: 1;
 }
 
-/* line 33, sass/style.scss */
+/* line 46, sass/style.scss */
 .popup {
   position: fixed;
-  top: 0;
-  left: 0;
+  top: 100px;
+  left: 50%;
   z-index: 1000;
+  width: 500px;
+  margin-left: -250px;
+  background-color: #ffffff;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+  -webkit-transform: scale(2);
+  -moz-transform: scale(2);
+  -ms-transform: scale(2);
+  -o-transform: scale(2);
+  transform: scale(2);
+  visibility: hidden;
+  opacity: 0;
+}
+/* line 58, sass/style.scss */
+.popup.show {
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
+  -ms-transform: scale(1);
+  -o-transform: scale(1);
+  transform: scale(1);
+  visibility: visible;
+  opacity: 1;
+}
+/* line 63, sass/style.scss */
+.popup .left {
+  width: 150px;
+  float: left;
+}
+/* line 65, sass/style.scss */
+.popup .left img {
+  width: 100%;
+}
+/* line 70, sass/style.scss */
+.popup .right {
+  padding: 15px;
+  float: right;
+  width: 350px;
+  position: relative;
+}
+/* line 76, sass/style.scss */
+.popup .close {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  color: #ffffff;
+  font-size: 20px;
+  padding-left: 10px;
+  right: -30px;
+  top: 0px;
+  background-color: #000000;
+}
+/* line 86, sass/style.scss */
+.popup .close:hover {
+  cursor: pointer;
 }
